@@ -1,0 +1,11 @@
+C:\Users\anton\Source\Repos\Labo2_TP1\Labo2_TP1\Labo2_TP1\bin\Debug\Labo2_TP1.exe.config
+C:\Users\anton\Source\Repos\Labo2_TP1\Labo2_TP1\Labo2_TP1\bin\Debug\Labo2_TP1.exe
+C:\Users\anton\Source\Repos\Labo2_TP1\Labo2_TP1\Labo2_TP1\bin\Debug\Labo2_TP1.pdb
+C:\Users\anton\Source\Repos\Labo2_TP1\Labo2_TP1\Labo2_TP1\obj\Debug\Labo2_TP1.csprojAssemblyReference.cache
+C:\Users\anton\Source\Repos\Labo2_TP1\Labo2_TP1\Labo2_TP1\obj\Debug\Labo2_TP1.FormPrincipal.resources
+C:\Users\anton\Source\Repos\Labo2_TP1\Labo2_TP1\Labo2_TP1\obj\Debug\Labo2_TP1.Properties.Resources.resources
+C:\Users\anton\Source\Repos\Labo2_TP1\Labo2_TP1\Labo2_TP1\obj\Debug\Labo2_TP1.FormTP1.resources
+C:\Users\anton\Source\Repos\Labo2_TP1\Labo2_TP1\Labo2_TP1\obj\Debug\Labo2_TP1.csproj.GenerateResource.cache
+C:\Users\anton\Source\Repos\Labo2_TP1\Labo2_TP1\Labo2_TP1\obj\Debug\Labo2_TP1.csproj.CoreCompileInputs.cache
+C:\Users\anton\Source\Repos\Labo2_TP1\Labo2_TP1\Labo2_TP1\obj\Debug\Labo2_TP1.exe
+C:\Users\anton\Source\Repos\Labo2_TP1\Labo2_TP1\Labo2_TP1\obj\Debug\Labo2_TP1.pdb
