@@ -24,5 +24,12 @@ namespace Labo2_TP1
             caller.Show();
             this.Close();
         }
+
+        private void FormTP1_FormClosing_1(object sender, FormClosingEventArgs e)
+        {
+            //caller.Close();
+            Application.Exit();
+        }
+
     }
 }
