@@ -26,6 +26,7 @@ namespace Labo2_TP1
         {
             FormTP1 formTP1 = new FormTP1(this);
             formTP1.Show();
+            //formTP1.ShowDialog();
             this.Hide();
         }
     }

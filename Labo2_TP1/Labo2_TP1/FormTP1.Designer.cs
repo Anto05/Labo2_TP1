@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.btnVolver = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dGQuesos = new System.Windows.Forms.DataGridView();
             this.lblPrecio = new System.Windows.Forms.Label();
             this.lblPeso = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -41,12 +41,12 @@
             this.btnBorrar = new System.Windows.Forms.Button();
             this.lblQuesos = new System.Windows.Forms.Label();
             this.btnEnter = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dGQuesos)).BeginInit();
             this.SuspendLayout();
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(925, 351);
+            this.btnVolver.Location = new System.Drawing.Point(1110, 315);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(75, 23);
             this.btnVolver.TabIndex = 0;
@@ -55,20 +55,20 @@
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btn_Volver_Click);
             // 
-            // dataGridView1
+            // dGQuesos
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(39, 42);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(298, 308);
-            this.dataGridView1.TabIndex = 1;
+            this.dGQuesos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dGQuesos.Location = new System.Drawing.Point(39, 42);
+            this.dGQuesos.Name = "dGQuesos";
+            this.dGQuesos.RowHeadersWidth = 51;
+            this.dGQuesos.RowTemplate.Height = 24;
+            this.dGQuesos.Size = new System.Drawing.Size(475, 308);
+            this.dGQuesos.TabIndex = 1;
             // 
             // lblPrecio
             // 
             this.lblPrecio.AutoSize = true;
-            this.lblPrecio.Location = new System.Drawing.Point(386, 159);
+            this.lblPrecio.Location = new System.Drawing.Point(554, 179);
             this.lblPrecio.Name = "lblPrecio";
             this.lblPrecio.Size = new System.Drawing.Size(48, 17);
             this.lblPrecio.TabIndex = 2;
@@ -77,7 +77,7 @@
             // lblPeso
             // 
             this.lblPeso.AutoSize = true;
-            this.lblPeso.Location = new System.Drawing.Point(386, 220);
+            this.lblPeso.Location = new System.Drawing.Point(554, 240);
             this.lblPeso.Name = "lblPeso";
             this.lblPeso.Size = new System.Drawing.Size(40, 17);
             this.lblPeso.TabIndex = 3;
@@ -86,7 +86,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(634, 42);
+            this.label3.Location = new System.Drawing.Point(802, 62);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(104, 17);
             this.label3.TabIndex = 4;
@@ -94,37 +94,38 @@
             // 
             // txtPrecio
             // 
-            this.txtPrecio.Location = new System.Drawing.Point(462, 154);
+            this.txtPrecio.Location = new System.Drawing.Point(630, 179);
             this.txtPrecio.Name = "txtPrecio";
             this.txtPrecio.Size = new System.Drawing.Size(100, 22);
             this.txtPrecio.TabIndex = 5;
             // 
             // txtPeso
             // 
-            this.txtPeso.Location = new System.Drawing.Point(462, 215);
+            this.txtPeso.Location = new System.Drawing.Point(630, 240);
             this.txtPeso.Name = "txtPeso";
             this.txtPeso.Size = new System.Drawing.Size(100, 22);
             this.txtPeso.TabIndex = 6;
             // 
             // btnGuardar
             // 
-            this.btnGuardar.Location = new System.Drawing.Point(389, 295);
+            this.btnGuardar.Location = new System.Drawing.Point(557, 315);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(75, 23);
             this.btnGuardar.TabIndex = 7;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // txtPesoMaximo
             // 
-            this.txtPesoMaximo.Location = new System.Drawing.Point(637, 81);
+            this.txtPesoMaximo.Location = new System.Drawing.Point(805, 101);
             this.txtPesoMaximo.Name = "txtPesoMaximo";
             this.txtPesoMaximo.Size = new System.Drawing.Size(100, 22);
             this.txtPesoMaximo.TabIndex = 8;
             // 
             // btnLimpiar
             // 
-            this.btnLimpiar.Location = new System.Drawing.Point(504, 294);
+            this.btnLimpiar.Location = new System.Drawing.Point(672, 314);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(75, 23);
             this.btnLimpiar.TabIndex = 9;
@@ -133,17 +134,18 @@
             // 
             // btnBorrar
             // 
-            this.btnBorrar.Location = new System.Drawing.Point(262, 371);
+            this.btnBorrar.Location = new System.Drawing.Point(439, 373);
             this.btnBorrar.Name = "btnBorrar";
             this.btnBorrar.Size = new System.Drawing.Size(75, 23);
             this.btnBorrar.TabIndex = 10;
             this.btnBorrar.Text = "Borrar";
             this.btnBorrar.UseVisualStyleBackColor = true;
+            this.btnBorrar.Click += new System.EventHandler(this.btnBorrar_Click);
             // 
             // lblQuesos
             // 
             this.lblQuesos.AutoSize = true;
-            this.lblQuesos.Location = new System.Drawing.Point(810, 42);
+            this.lblQuesos.Location = new System.Drawing.Point(978, 62);
             this.lblQuesos.Name = "lblQuesos";
             this.lblQuesos.Size = new System.Drawing.Size(121, 17);
             this.lblQuesos.TabIndex = 11;
@@ -151,7 +153,7 @@
             // 
             // btnEnter
             // 
-            this.btnEnter.Location = new System.Drawing.Point(661, 138);
+            this.btnEnter.Location = new System.Drawing.Point(829, 158);
             this.btnEnter.Name = "btnEnter";
             this.btnEnter.Size = new System.Drawing.Size(75, 23);
             this.btnEnter.TabIndex = 12;
@@ -162,7 +164,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1072, 429);
+            this.ClientSize = new System.Drawing.Size(1259, 429);
             this.Controls.Add(this.btnEnter);
             this.Controls.Add(this.lblQuesos);
             this.Controls.Add(this.btnBorrar);
@@ -174,12 +176,11 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.lblPeso);
             this.Controls.Add(this.lblPrecio);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dGQuesos);
             this.Controls.Add(this.btnVolver);
             this.Name = "FormTP1";
             this.Text = "TP1";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormTP1_FormClosing_1);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dGQuesos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -188,7 +189,7 @@
         #endregion
 
         private System.Windows.Forms.Button btnVolver;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dGQuesos;
         private System.Windows.Forms.Label lblPrecio;
         private System.Windows.Forms.Label lblPeso;
         private System.Windows.Forms.Label label3;
