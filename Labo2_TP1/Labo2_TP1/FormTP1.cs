@@ -17,12 +17,7 @@ namespace Labo2_TP1
 
         List<cQueso> quesos = new List<cQueso>();
 
-
-        static int contador = 10;
-        //static int[] lista_quesos = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-        //static float[] lista_valores = { 505, 352, 458, 220, 354, 414, 498, 545, 473, 543 };
-        //static float[] lista_pesos = { 23, 26, 20, 18, 32, 27, 29, 26, 30, 27 };
-        static (int, float, float)[] mochila = new (int, float, float)[contador];
+        static (int, float, float)[] mochila;
         //int--->queso, float--->cantidad en kg, float--->valor
 
         public FormTP1(FormPrincipal c)
@@ -41,10 +36,7 @@ namespace Labo2_TP1
 
         private void btnGreedy_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < contador; i++)
-            {
-                mochila[i] = (0, 0, 0);
-            }
+            //todo corregir que pasa si no hay nada ingresado en el label o si es letras 
             Algoritmo_voraz(float.Parse(txtPesoMaximo.Text));        
         }
 
@@ -56,7 +48,8 @@ namespace Labo2_TP1
 
         private void Algoritmo_voraz(float W)
         {
-            contador = quesos.Count();
+            int contador = quesos.Count();
+            mochila = new (int, float, float)[contador];
             //queso-valor/peso-peso
             (int, float, float)[] ordenado = new (int, float, float)[contador];
             for (int j = 0; j < contador; j++)
@@ -112,14 +105,17 @@ namespace Labo2_TP1
             
             float sum = mochila.Sum(s => s.Item3 * s.Item2);
             //Console.WriteLine("Mochila con valor total: {0} y peso actual: {1}", sum, peso_actual);
-            texto = "cod.  Cantidad  Precio\n";
+            texto = "cod.  Cant  Precio\n";
             for (int k = 0; k < contador; k++)
             {
-                texto += mochila[k].Item1.ToString() + "      " + Math.Round(mochila[k].Item2, 2).ToString() + "   " + Math.Round(mochila[k].Item3,2).ToString() + "\n";
+                texto += mochila[k].Item1.ToString() + "     " + Math.Round(mochila[k].Item2, 2).ToString() + "     " + Math.Round(mochila[k].Item3,2).ToString() + "\n";
             }
           
 
             lblQuesos.Text = texto;
+
+
+            
 
         }
 

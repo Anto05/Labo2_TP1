@@ -86,7 +86,7 @@
             // pesoLabel
             // 
             pesoLabel.AutoSize = true;
-            pesoLabel.Location = new System.Drawing.Point(15, 166);
+            pesoLabel.Location = new System.Drawing.Point(15, 245);
             pesoLabel.Name = "pesoLabel";
             pesoLabel.Size = new System.Drawing.Size(43, 17);
             pesoLabel.TabIndex = 2;
@@ -226,7 +226,7 @@
             // pesoTextBox
             // 
             this.pesoTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.cQuesoBindingSource, "peso", true));
-            this.pesoTextBox.Location = new System.Drawing.Point(75, 163);
+            this.pesoTextBox.Location = new System.Drawing.Point(75, 245);
             this.pesoTextBox.Name = "pesoTextBox";
             this.pesoTextBox.Size = new System.Drawing.Size(175, 22);
             this.pesoTextBox.TabIndex = 3;
