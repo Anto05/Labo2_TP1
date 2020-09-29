@@ -20,6 +20,7 @@ namespace Labo2_TP1
         static (int, float, float)[] mochila;
         //int--->queso, float--->cantidad en kg, float--->valor
 
+        //todo chequear los valores de entrada
         public FormTP1(FormPrincipal c)
         {
             InitializeComponent();
@@ -50,92 +51,48 @@ namespace Labo2_TP1
         private void btnGreedy_Click(object sender, EventArgs e)
         {
             //todo corregir que pasa si no hay nada ingresado en el label o si es letras 
-            Algoritmo_voraz(float.Parse(txtPesoMaximo.Text));        
+            uint pesoaux = 0;
+            if(!uint.TryParse(txtPesoMaximo.Text, out pesoaux))
+            {
+                MessageBox.Show("Formato de peso no valido. Por favor, ingrese un numero no decimal >= 0!.",
+                                "Error Formato",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
+
+            }
+            else
+            {
+                Algoritmo_voraz(pesoaux);
+            }
+        
         }
 
         private void btnPD_Click(object sender, EventArgs e)
         {
-            //todo imprimir mochila
-            int W = int.Parse(txtPesoMaximo.Text);
-            int n = quesos.Count();
-            mochila =  new (int, float, float)[n];
-
-            int i, w;
-            float[,] K = new float[n, W + 1];
-
-            for (i = 0; i < n; i++)
+            uint pesoaux = 0;
+            if (!uint.TryParse(txtPesoMaximo.Text, out pesoaux))
             {
-                for (w = 0; w <= W; w++)
-                {
-                    
-                    if (w == 0)
-                        K[i, w] = 0;
-                    else if (quesos[i].peso <= w)
-                    {
-                        if (i == 0) 
-                            K[i, w] = quesos[i].precio;
-                        else
-                            K[i, w] = Math.Max(K[i - 1, w], quesos[i].precio + K[i - 1, w - quesos[i].peso]);
-                        
-                    }
-                    else
-                    {
-                        if (i == 0)
-                            K[i, w] = 0;
-                        else
-                            K[i, w] = K[i - 1, w];
-                    }
-                    
-                    Console.Write(K[i, w] + " ");
-                        
-                }
-                Console.WriteLine("\n");
+                MessageBox.Show("Formato de peso no valido. Por favor, ingrese un numero no decimal >= 0!.",
+                                "Error Formato",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
+
+            }
+            else
+            {
+                Programacion_dinamica(pesoaux);
             }
 
-            i = n - 1;
-            w = W;
-            while (i > 0 && w >= 0)
-            {
-                if (i == 1 && K[i - 1, w] != K[i, w])
-                {
-                    mochila[i] = (quesos[i].codigo, quesos[i].peso, quesos[i].precio);
-                    mochila[i-1]= (quesos[i-1].codigo, quesos[i-1].peso, quesos[i-1].precio);
-                    w = w - quesos[i].peso- quesos[i-1].peso;
-                }
-                if (K[i, w] != K[i - 1, w])
-                {
-                    mochila[i] = (quesos[i].codigo, quesos[i].peso, quesos[i].precio);
-                    w = w - quesos[i].peso;
-                }
-                i = i - 1;
-               
-            }
-
-
-            string texto = "";
-            float sum = mochila.Sum(s => s.Item3 * s.Item2);
-            //Console.WriteLine("Mochila con valor total: {0} y peso actual: {1}", sum, peso_actual);
-            texto = "cod.  KG  Precio\n";
-            for (int k = 0; k < n; k++)
-            {
-                texto += mochila[k].Item1.ToString() + "     " + Math.Round(mochila[k].Item2, 2).ToString() + "     " + Math.Round(mochila[k].Item3, 2).ToString() + "\n";
-            }
-
-
-            lblQuesos.Text = texto;
-            lblPrecio.Text = "PRECIO TOTAL: " + K[n - 1, W] + " \n Falta " + w + "kg para completar";
-
-            Console.WriteLine(K[n - 1, W]);
- 
         }
 
-        private void Algoritmo_voraz(float W)
+        private void Algoritmo_voraz(uint W)
         {
             int contador = quesos.Count();
             mochila = new (int, float, float)[contador];
             //queso-valor/peso-peso
             (int, float, float)[] ordenado = new (int, float, float)[contador];
-            for (int j = 0; j < contador; j++)
+            int j;
+            for (j = 0; j < contador; j++)
             {
                 ordenado[j] = (quesos[j].codigo, quesos[j].precio / quesos[j].peso, quesos[j].peso);
             }
@@ -148,7 +105,7 @@ namespace Labo2_TP1
             //      elemento supere la capacidad de la mochila.
 
 
-            for (int j = 0; j < contador - 1; j++)
+            for (j = 0; j < contador - 1; j++)
             {
                 if (ordenado[j].Item2 == ordenado[j + 1].Item2 && ordenado[j].Item3 > ordenado[j + 1].Item3)
                 {
@@ -202,7 +159,88 @@ namespace Labo2_TP1
 
         }
 
-        
+        private void Programacion_dinamica(uint W)
+        {
+            int n = quesos.Count();
+            mochila = new (int, float, float)[n];
+
+            int i;
+            uint w;
+            float[,] K = new float[n, W + 1];
+
+            for (i = 0; i < n; i++)
+            {
+                for (w = 0; w <= W; w++)
+                {
+                    if (w == 0)
+                        K[i, w] = 0;
+                    else if (quesos[i].peso <= w)
+                    {
+                        if (i == 0)
+                            K[i, w] = quesos[i].precio;
+                        else
+                            K[i, w] = Math.Max(K[i - 1, w], quesos[i].precio + K[i - 1, w - quesos[i].peso]);
+                    }
+                    else
+                    {
+                        if (i == 0)
+                            K[i, w] = 0;
+                        else
+                            K[i, w] = K[i - 1, w];
+                    }
+
+                    Console.Write(K[i, w] + " ");
+
+                }
+                Console.WriteLine("\n");
+            }
+
+            i = n - 1;
+            w = W;
+            while (i > 0 && w >= 0)
+            {
+                /*
+                if (i == 1 && K[i - 1, w] != K[i, w])
+                {
+                    mochila[i] = (quesos[i].codigo, quesos[i].peso, quesos[i].precio);
+                    mochila[i - 1] = (quesos[i - 1].codigo, quesos[i - 1].peso, quesos[i - 1].precio);
+                    w = w - quesos[i].peso - quesos[i - 1].peso;
+                }
+                else if (K[i, w] != K[i - 1, w])
+                {
+                    mochila[i] = (quesos[i].codigo, quesos[i].peso, quesos[i].precio);
+                    w = w - quesos[i].peso;
+                }
+                i = i - 1;
+                */
+                if (K[i, w] != K[i - 1, w])
+                {
+                    mochila[i] = (quesos[i].codigo, quesos[i].peso, quesos[i].precio);
+                    w = (uint)(w - quesos[i].peso);
+                }
+                i = i - 1;
+                if (i == 0 && K[i, w] != 0)
+                {
+                    mochila[i] = (quesos[i].codigo, quesos[i].peso, quesos[i].precio);
+                    w = (uint)(w - quesos[i].peso);
+                }
+
+            }
+
+
+            string texto = "cod.  KG  Precio\n";
+            float sum = mochila.Sum(s => s.Item3 * s.Item2);
+            for (i = 0; i < n; i++)
+            {
+                texto += mochila[i].Item1.ToString() + "     " + Math.Round(mochila[i].Item2, 2).ToString() + "     " + Math.Round(mochila[i].Item3, 2).ToString() + "\n";
+            }
+
+
+            lblQuesos.Text = texto;
+            lblPrecio.Text = "PRECIO TOTAL: " + K[n - 1, W] + " \n Falta " + w + "kg para completar";
+
+            Console.WriteLine(K[n - 1, W]);
+        }
     }
 }
 
