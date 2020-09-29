@@ -61,6 +61,7 @@
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.cQuesoBindingNavigatorSaveItem = new System.Windows.Forms.ToolStripButton();
             this.btnPD = new System.Windows.Forms.Button();
+            this.lblPrecio = new System.Windows.Forms.Label();
             codigoLabel = new System.Windows.Forms.Label();
             pesoLabel = new System.Windows.Forms.Label();
             precioLabel = new System.Windows.Forms.Label();
@@ -266,7 +267,7 @@
             this.cQuesoBindingNavigator.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.cQuesoBindingNavigator.Name = "cQuesoBindingNavigator";
             this.cQuesoBindingNavigator.PositionItem = this.bindingNavigatorPositionItem;
-            this.cQuesoBindingNavigator.Size = new System.Drawing.Size(1259, 27);
+            this.cQuesoBindingNavigator.Size = new System.Drawing.Size(1259, 31);
             this.cQuesoBindingNavigator.TabIndex = 14;
             this.cQuesoBindingNavigator.Text = "bindingNavigator1";
             // 
@@ -276,7 +277,7 @@
             this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
             this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
             this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(29, 24);
+            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(29, 28);
             this.bindingNavigatorAddNewItem.Text = "Add new";
             // 
             // bindingNavigatorCountItem
@@ -375,11 +376,21 @@
             this.btnPD.UseVisualStyleBackColor = true;
             this.btnPD.Click += new System.EventHandler(this.btnPD_Click);
             // 
+            // lblPrecio
+            // 
+            this.lblPrecio.AutoSize = true;
+            this.lblPrecio.Location = new System.Drawing.Point(997, 320);
+            this.lblPrecio.Name = "lblPrecio";
+            this.lblPrecio.Size = new System.Drawing.Size(117, 17);
+            this.lblPrecio.TabIndex = 16;
+            this.lblPrecio.Text = "PRECIO TOTAL: ";
+            // 
             // FormTP1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1259, 429);
+            this.Controls.Add(this.lblPrecio);
             this.Controls.Add(this.btnPD);
             this.Controls.Add(this.cQuesoBindingNavigator);
             this.Controls.Add(this.splitContainer1);
@@ -435,5 +446,6 @@
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
         private System.Windows.Forms.ToolStripButton cQuesoBindingNavigatorSaveItem;
         private System.Windows.Forms.Button btnPD;
+        private System.Windows.Forms.Label lblPrecio;
     }
 }

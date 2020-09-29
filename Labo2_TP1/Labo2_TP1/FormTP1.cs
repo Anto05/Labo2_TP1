@@ -60,13 +60,11 @@ namespace Labo2_TP1
             int n = quesos.Count();
             mochila =  new (int, float, float)[n];
 
-            int i, w, j = 0;
+            int i, w;
             float[,] K = new float[n, W + 1];
-            bool flag = false;
 
             for (i = 0; i < n; i++)
             {
-                flag = false;
                 for (w = 0; w <= W; w++)
                 {
                     
@@ -78,16 +76,7 @@ namespace Labo2_TP1
                             K[i, w] = quesos[i].precio;
                         else
                             K[i, w] = Math.Max(K[i - 1, w], quesos[i].precio + K[i - 1, w - quesos[i].peso]);
-                        if (!flag)
-                        {
-                            flag = true;
-                            if(K[i-1, w] < quesos[i].precio + K[i-1, w - quesos[i].peso])
-                            {
-
-                                mochila[j] = (quesos[i].codigo, quesos[i].precio, quesos[i].peso);
-                                j++;
-                            }
-                        }
+                        
                     }
                     else
                     {
@@ -103,12 +92,30 @@ namespace Labo2_TP1
                 Console.WriteLine("\n");
             }
 
+            i = n - 1;
+            w = W;
+            while (i > 0 && w >= 0)
+            {
+                if (i == 1 && K[i - 1, w] != K[i, w])
+                {
+                    mochila[i] = (quesos[i].codigo, quesos[i].peso, quesos[i].precio);
+                    mochila[i-1]= (quesos[i-1].codigo, quesos[i-1].peso, quesos[i-1].precio);
+                    w = w - quesos[i].peso- quesos[i-1].peso;
+                }
+                if (K[i, w] != K[i - 1, w])
+                {
+                    mochila[i] = (quesos[i].codigo, quesos[i].peso, quesos[i].precio);
+                    w = w - quesos[i].peso;
+                }
+                i = i - 1;
+               
+            }
+
 
             string texto = "";
-
             float sum = mochila.Sum(s => s.Item3 * s.Item2);
             //Console.WriteLine("Mochila con valor total: {0} y peso actual: {1}", sum, peso_actual);
-            texto = "cod.  Cant  Precio\n";
+            texto = "cod.  KG  Precio\n";
             for (int k = 0; k < n; k++)
             {
                 texto += mochila[k].Item1.ToString() + "     " + Math.Round(mochila[k].Item2, 2).ToString() + "     " + Math.Round(mochila[k].Item3, 2).ToString() + "\n";
@@ -116,6 +123,7 @@ namespace Labo2_TP1
 
 
             lblQuesos.Text = texto;
+            lblPrecio.Text = "PRECIO TOTAL: " + K[n - 1, W] + " \n Falta " + w + "kg para completar";
 
             Console.WriteLine(K[n - 1, W]);
  
@@ -138,8 +146,6 @@ namespace Labo2_TP1
             //   Ordenar por relacion valor/peso en manera descendente
             //     Ir agregando a la mochila hasta que la fraccion del
             //      elemento supere la capacidad de la mochila.
-            //     Tambien voy chequeando que la fraccion del elemento que voy agregando tenga
-            //     mayor benefecio con respecto al siguiente entero de menor beneficio
 
 
             for (int j = 0; j < contador - 1; j++)
@@ -183,18 +189,20 @@ namespace Labo2_TP1
             texto = "cod.  Cant  Precio\n";
             for (int k = 0; k < contador; k++)
             {
+
                 texto += mochila[k].Item1.ToString() + "     " + Math.Round(mochila[k].Item2, 2).ToString() + "     " + Math.Round(mochila[k].Item3, 2).ToString() + "\n";
             }
 
 
             lblQuesos.Text = texto;
+            lblPrecio.Text = "\nPRECIO TOTAL: " + sum + "\n Capacidad disponible: " +(W - peso_actual) + "kg";
 
             //todo imprimir total value
 
 
         }
- 
 
+        
     }
 }
 
