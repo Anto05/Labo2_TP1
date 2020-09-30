@@ -17,7 +17,7 @@ namespace Labo2_TP1
 
         List<cQueso> quesos = new List<cQueso>();
 
-        static (int, float, float)[] mochila;
+        static (string, float, float)[] mochila;
         //int--->queso, float--->cantidad en kg, float--->valor
 
         //todo chequear los valores de entrada
@@ -26,17 +26,16 @@ namespace Labo2_TP1
             InitializeComponent();
             caller = c;
 
-
-            quesos.Add(new cQueso { codigo = 1, peso = 6, precio = 80 });
-            quesos.Add(new cQueso { codigo = 2, peso = 2, precio = 30 });
-            quesos.Add(new cQueso { codigo = 3, peso = 5, precio = 20 });
-            quesos.Add(new cQueso { codigo = 4, peso = 10, precio = 20 });
-            quesos.Add(new cQueso { codigo = 5, peso = 1, precio = 50 });
-            quesos.Add(new cQueso { codigo = 6, peso = 7, precio = 40 });
-            quesos.Add(new cQueso { codigo = 7, peso = 3, precio = 30 });
-            quesos.Add(new cQueso { codigo = 8, peso = 4, precio = 10 });
-            quesos.Add(new cQueso { codigo = 9, peso = 10, precio = 30 });
-            quesos.Add(new cQueso { codigo = 10, peso = 7, precio = 20 });
+            quesos.Add(new cQueso { codigo = "D", peso = 10, precio = 20 });
+            quesos.Add(new cQueso { codigo = "E", peso = 1, precio = 50 });
+            quesos.Add(new cQueso { codigo = "F", peso = 7, precio = 40 });
+            quesos.Add(new cQueso { codigo = "G", peso = 3, precio = 30 });
+            quesos.Add(new cQueso { codigo = "A", peso = 6, precio = 80 });
+            quesos.Add(new cQueso { codigo = "B", peso = 2, precio = 30 });
+            quesos.Add(new cQueso { codigo = "C", peso = 5, precio = 20 });
+            quesos.Add(new cQueso { codigo = "H", peso = 4, precio = 10 });
+            quesos.Add(new cQueso { codigo = "I", peso = 10, precio = 30 });
+            quesos.Add(new cQueso { codigo = "J", peso = 7, precio = 20 });
 
 
             cQuesoBindingSource.DataSource = quesos;
@@ -50,7 +49,6 @@ namespace Labo2_TP1
 
         private void btnGreedy_Click(object sender, EventArgs e)
         {
-            //todo corregir que pasa si no hay nada ingresado en el label o si es letras 
             uint pesoaux = 0;
             if(!uint.TryParse(txtPesoMaximo.Text, out pesoaux))
             {
@@ -58,7 +56,6 @@ namespace Labo2_TP1
                                 "Error Formato",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Error);
-
             }
             else
             {
@@ -76,7 +73,6 @@ namespace Labo2_TP1
                                 "Error Formato",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Error);
-
             }
             else
             {
@@ -88,13 +84,13 @@ namespace Labo2_TP1
         private void Algoritmo_voraz(uint W)
         {
             int contador = quesos.Count();
-            mochila = new (int, float, float)[contador];
+            mochila = new (string, float, float)[contador];
             //queso-valor/peso-peso
-            (int, float, float)[] ordenado = new (int, float, float)[contador];
+            (string, float, float)[] ordenado = new (string, float, float)[contador];
             int j;
             for (j = 0; j < contador; j++)
             {
-                ordenado[j] = (quesos[j].codigo, quesos[j].precio / quesos[j].peso, quesos[j].peso);
+                ordenado[j] = (quesos[j].codigo, (float)quesos[j].precio / (float)quesos[j].peso, quesos[j].peso);
             }
             // to array devuelve un struct KeyValuePair iterable, en este caso una tupla de 3 ele
             ordenado = ordenado.OrderByDescending(s => s.Item2).ToArray();
@@ -146,23 +142,20 @@ namespace Labo2_TP1
             texto = "cod.  Cant  Precio\n";
             for (int k = 0; k < contador; k++)
             {
-
+                if (mochila[k].Item2 == 0) break;
                 texto += mochila[k].Item1.ToString() + "     " + Math.Round(mochila[k].Item2, 2).ToString() + "     " + Math.Round(mochila[k].Item3, 2).ToString() + "\n";
             }
 
 
             lblQuesos.Text = texto;
-            lblPrecio.Text = "\nPRECIO TOTAL: " + sum + "\n Capacidad disponible: " +(W - peso_actual) + "kg";
-
-            //todo imprimir total value
-
+            lblPrecio.Text = "\nPRECIO TOTAL: $" + Math.Round(sum,2) + "\n Capacidad a completar: " +(W - peso_actual) + "kg";
 
         }
 
         private void Programacion_dinamica(uint W)
         {
             int n = quesos.Count();
-            mochila = new (int, float, float)[n];
+            mochila = new (string, float, float)[n];
 
             int i;
             uint w;
@@ -199,20 +192,7 @@ namespace Labo2_TP1
             w = W;
             while (i > 0 && w >= 0)
             {
-                /*
-                if (i == 1 && K[i - 1, w] != K[i, w])
-                {
-                    mochila[i] = (quesos[i].codigo, quesos[i].peso, quesos[i].precio);
-                    mochila[i - 1] = (quesos[i - 1].codigo, quesos[i - 1].peso, quesos[i - 1].precio);
-                    w = w - quesos[i].peso - quesos[i - 1].peso;
-                }
-                else if (K[i, w] != K[i - 1, w])
-                {
-                    mochila[i] = (quesos[i].codigo, quesos[i].peso, quesos[i].precio);
-                    w = w - quesos[i].peso;
-                }
-                i = i - 1;
-                */
+                
                 if (K[i, w] != K[i - 1, w])
                 {
                     mochila[i] = (quesos[i].codigo, quesos[i].peso, quesos[i].precio);
@@ -232,12 +212,13 @@ namespace Labo2_TP1
             float sum = mochila.Sum(s => s.Item3 * s.Item2);
             for (i = 0; i < n; i++)
             {
-                texto += mochila[i].Item1.ToString() + "     " + Math.Round(mochila[i].Item2, 2).ToString() + "     " + Math.Round(mochila[i].Item3, 2).ToString() + "\n";
+                if (mochila[i].Item2 != 0)
+                    texto += mochila[i].Item1.ToString() + "     " + Math.Round(mochila[i].Item2, 2).ToString() + "     " + Math.Round(mochila[i].Item3, 2).ToString() + "\n";
             }
 
 
             lblQuesos.Text = texto;
-            lblPrecio.Text = "PRECIO TOTAL: " + K[n - 1, W] + " \n Falta " + w + "kg para completar";
+            lblPrecio.Text = "PRECIO TOTAL: " + K[n - 1, W] + " \n Falta " + w + "kg para completar.";
 
             Console.WriteLine(K[n - 1, W]);
         }

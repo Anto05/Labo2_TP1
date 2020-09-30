@@ -10,7 +10,7 @@ namespace Labo2_TP1
     {
         //todo VER COMO ORGANIZAR EL CODIGO
 
-        public int codigo { get; set; }
+        public string codigo { get; set; }
         public int precio { get; set; }
         public int peso { get; set; }
 
