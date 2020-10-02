@@ -231,6 +231,7 @@
             this.pesoTextBox.Name = "pesoTextBox";
             this.pesoTextBox.Size = new System.Drawing.Size(175, 22);
             this.pesoTextBox.TabIndex = 3;
+            this.pesoTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.pesoTextBox_Validating);
             // 
             // precioTextBox
             // 

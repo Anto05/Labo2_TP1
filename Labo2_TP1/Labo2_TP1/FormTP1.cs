@@ -37,7 +37,6 @@ namespace Labo2_TP1
             quesos.Add(new cQueso { codigo = "J", peso = 7, precio = 20 });
             
             cQuesoBindingSource.DataSource = quesos;
-
         }
 
         private void btn_Volver_Click(object sender, EventArgs e)
@@ -90,10 +89,7 @@ namespace Labo2_TP1
             int j;
             for (j = 0; j < contador; j++)
             {
-                if(quesos[j].peso == 0)
-                    ordenado[j] = (quesos[j].codigo, 0, quesos[j].peso); //todo check
-                else
-                    ordenado[j] = (quesos[j].codigo, (float)quesos[j].precio / (float)quesos[j].peso, quesos[j].peso);
+                ordenado[j] = (quesos[j].codigo, (float)quesos[j].precio / (float)quesos[j].peso, quesos[j].peso);
             }
             // to array devuelve un struct KeyValuePair iterable, en este caso una tupla de 3 ele
             ordenado = ordenado.OrderByDescending(s => s.Item2).ToArray();
@@ -132,12 +128,12 @@ namespace Labo2_TP1
                 i++;
             }
 
-            string texto = "cod.  Cant  Precio\n";
+            string texto = string.Format("{0, -10} {1, -10} {2, 15}\n", "COD.", "Cant.", "Precio");
             float sum = mochila.Sum(s => s.Item3);
             for (j = 0; j < contador; j++)
             {
                 if (mochila[j].Item2 == 0) break;
-                texto += mochila[j].Item1.ToString() + "     " + Math.Round(mochila[j].Item2, 2).ToString() + "     " + Math.Round(mochila[j].Item3, 2).ToString() + "\n";
+                texto += string.Format("{0, -15} {1, -15} {2, 10}\n", mochila[j].Item1.ToString(), Math.Round(mochila[j].Item2, 2).ToString(), Math.Round(mochila[j].Item3, 2).ToString());
             }
 
             lblQuesos.Text = texto;
@@ -160,8 +156,6 @@ namespace Labo2_TP1
                 {
                     if (w == 0)
                         K[i, w] = 0;
-                    else if (quesos[i].peso <= 0)
-                        continue;
                     else if (quesos[i].peso <= w)
                     {
                         if (i == 0)
@@ -176,13 +170,13 @@ namespace Labo2_TP1
                         else
                             K[i, w] = K[i - 1, w];
                     }
-                    Console.Write(K[i, w] + " ");
+                    
                 }
-                Console.Write("\n");
+                
             }
 
             if (n == 1 && quesos[0].peso <= W)
-            {//todo check
+            {
                 w = (uint)(W - quesos[0].peso);
                 mochila[0] = (quesos[0].codigo, quesos[0].peso, quesos[0].precio);
             }
@@ -208,13 +202,12 @@ namespace Labo2_TP1
                 }
             }
 
-            string texto = "cod.  KG  Precio\n";
+            string texto = string.Format("{0, -10} {1, -10} {2, 15}\n", "COD.", "Kg", "Precio");
             float sum = mochila.Sum(s => s.Item3);
             for (i = 0; i < j; i++)
             {
-                texto += mochila[i].Item1.ToString() + "     " + Math.Round(mochila[i].Item2, 2).ToString() + "     " + Math.Round(mochila[i].Item3, 2).ToString() + "\n";
+                texto += string.Format("{0, -15} {1, -15} {2, 10}\n", mochila[i].Item1.ToString(), Math.Round(mochila[i].Item2, 2).ToString(), Math.Round(mochila[i].Item3, 2).ToString() );
             }
-
 
             lblQuesos.Text = texto;
             lblPrecio.Text = "PRECIO TOTAL: $" + K[n - 1, W] + " \n Falta " + w + "kg para completar.";
@@ -225,21 +218,37 @@ namespace Labo2_TP1
         {
             string t = precioTextBox.Text;
             int aux = -1;
-            if(!int.TryParse(t, out aux))
+            if (!int.TryParse(t, out aux) || aux <= 0)
             {
                 e.Cancel = true;
-                precioTextBox.Focus();
-            }
-            else if(aux <= 0)
-            {
-                e.Cancel = true;
-                precioTextBox.Focus();
+                MessageBox.Show("Ingrese un numero mayor a cero (0).",
+                                "PRECIO debe ser mayor a cero",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
             }
             else
             {
                 e.Cancel = false;
             }
 
+        }
+
+        private void pesoTextBox_Validating(object sender, CancelEventArgs e)
+        {
+            string t = pesoTextBox.Text;
+            int aux = -1;
+            if (!int.TryParse(t, out aux) || aux <= 0)
+            {
+                e.Cancel = true;
+                MessageBox.Show("Ingrese un numero mayor a cero (0).",
+                                "PESO debe ser mayor a cero",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
+            }
+            else
+            {
+                e.Cancel = false;
+            }
         }
     }
 }
