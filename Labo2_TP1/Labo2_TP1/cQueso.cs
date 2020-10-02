@@ -8,8 +8,6 @@ namespace Labo2_TP1
 {
     public class cQueso
     {
-        //todo VER COMO ORGANIZAR EL CODIGO
-
         public string codigo { get; set; }
         public int precio { get; set; }
         public int peso { get; set; }

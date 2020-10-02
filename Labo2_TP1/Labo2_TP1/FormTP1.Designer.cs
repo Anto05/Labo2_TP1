@@ -239,6 +239,7 @@
             this.precioTextBox.Name = "precioTextBox";
             this.precioTextBox.Size = new System.Drawing.Size(175, 22);
             this.precioTextBox.TabIndex = 5;
+            this.precioTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.precioTextBox_Validating);
             // 
             // cQuesoBindingNavigator
             // 
@@ -267,7 +268,7 @@
             this.cQuesoBindingNavigator.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.cQuesoBindingNavigator.Name = "cQuesoBindingNavigator";
             this.cQuesoBindingNavigator.PositionItem = this.bindingNavigatorPositionItem;
-            this.cQuesoBindingNavigator.Size = new System.Drawing.Size(1259, 31);
+            this.cQuesoBindingNavigator.Size = new System.Drawing.Size(1259, 27);
             this.cQuesoBindingNavigator.TabIndex = 14;
             this.cQuesoBindingNavigator.Text = "bindingNavigator1";
             // 
@@ -277,7 +278,7 @@
             this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
             this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
             this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(29, 28);
+            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(29, 24);
             this.bindingNavigatorAddNewItem.Text = "Add new";
             // 
             // bindingNavigatorCountItem
